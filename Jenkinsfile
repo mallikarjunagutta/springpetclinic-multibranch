@@ -18,10 +18,15 @@ pipeline{
             steps{
              junit 'target/surefire-reports/*.xml'
              archiveArtifacts 'target/*.jar'
-             sh "echo it should work now!"
-          
-            
+             sh "echo developer build is successfully created!"
             }
+        }
+    }
+    post{
+        always{
+            mail to: 'mallikarjuna9999@outlook.com'
+            subject: "Status of the pipeline ${currentBuild.fullDisplayName}",
+               body: "${env.BUILD_URL} has the result as ${currentBuild.result}"
         }
     }
 }
