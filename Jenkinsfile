@@ -2,17 +2,24 @@ pipeline{
     agent { label 'ubuntunode2'}
     triggers{
         cron('H * * * 1-5')
-        //cron('* * * *')
+    }
+    parameters {
+        string(name: 'MAVENGOAL', defaultValue: 'clean package', description: 'This is a maven goal')
+
+        string(name: 'URL', defaultValue: 'https://github.com/mallikarjunagutta/springpetclinic-multibranch.git', description: 'url of the git')
+        
     }
     stages{
         stage('scm') {
             steps{
-                git branch: 'developer', url:'https://github.com/mallikarjunagutta/springpetclinic-multibranch.git'
+                git branch: 'developer', url: "${params.URL}"
+
             }
         }
         stage('build') {
             steps {
-                sh script: 'mvn clean package'
+                sh script: "mvn ${params.MAVENGOAL}"
+                //sh script: 'mvn clean package'
             }
         }
         stage('post build'){
