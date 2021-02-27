@@ -1,5 +1,5 @@
 pipeline{
-    agent { label 'ubuntunode2'}
+    agent { label 'MASTER'}
     stages{
         stage('scm') {
             steps{
