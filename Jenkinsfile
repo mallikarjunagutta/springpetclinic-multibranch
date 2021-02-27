@@ -9,6 +9,7 @@ pipeline{
         string(name: 'URL', defaultValue: 'https://github.com/mallikarjunagutta/springpetclinic-multibranch.git', description: 'url of the git')
     }
     options{
+        //If time exceeds more than 3 seconds pipeline gets Aborted
             timeout(time: 3, unit: 'SECONDS')
          }
     stages{
