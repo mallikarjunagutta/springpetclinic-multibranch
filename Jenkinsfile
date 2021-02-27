@@ -7,14 +7,15 @@ pipeline{
         string(name: 'MAVENGOAL', defaultValue: 'clean package', description: 'This is a maven goal')
 
         string(name: 'URL', defaultValue: 'https://github.com/mallikarjunagutta/springpetclinic-multibranch.git', description: 'url of the git')
-        
     }
+    options{
+            timeout(time: 3, unit: 'SECONDS')
+         }
     stages{
         stage('scm') {
             steps{
                 git branch: 'developer', url: "${params.URL}"
-
-            }
+                }
         }
         stage('build') {
             steps {
