@@ -3,7 +3,7 @@ pipeline{
     triggers{
        cron('59 23 * * *')
       // cron('* * * *')
-    }
+        }
     stages{
         stage('scm') {
             steps{
@@ -21,17 +21,14 @@ pipeline{
              archiveArtifacts 'target/*.jar'
              sh "echo it should work now!"
           
-            
             }
         }
-        post
-        {
-        always
-           {
+    }
+    post{
+        always{
             mail to: 'mallikarjuna9999@outlook.com',
             subject: "Status of the pipeline ${currentBuild.fullDisplayName}",
                body: "${env.BUILD_URL} has the result as ${currentBuild.result}"
-            }
         }
     }
 }
