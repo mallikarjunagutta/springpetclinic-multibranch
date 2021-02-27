@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage('scm') {
             steps{
-                git branch: 'main', url:'https://github.com/mallikarjunagutta/springpetclinic-multibranch.git'
+                git branch: 'developer', url:'https://github.com/mallikarjunagutta/springpetclinic-multibranch.git'
             }
         }
         stage('build') {
