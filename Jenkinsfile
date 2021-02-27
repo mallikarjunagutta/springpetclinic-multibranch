@@ -1,7 +1,8 @@
 pipeline{
     agent { label 'ubuntunode1'}
     triggers{
-        cron('59 23 * * *')
+       // cron('59 23 * * *')
+       cron('* * * *')
     }
     stages{
         stage('scm') {
