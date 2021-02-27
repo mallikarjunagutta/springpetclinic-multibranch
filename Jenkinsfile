@@ -10,7 +10,7 @@ pipeline{
     }
     options{
         //If time exceeds more than 3 seconds pipeline gets Aborted
-            timeout(time: 3, unit: 'SECONDS')
+            timeout(time: 3, unit: 'HOURS')
          }
     stages{
         stage('scm') {
@@ -29,6 +29,13 @@ pipeline{
              junit 'target/surefire-reports/*.xml'
              archiveArtifacts 'target/*.jar'
              sh "echo developer build is successfully created!"
+             stash name: 'warfile', includes: 'target/*.jar'
+            }
+        }
+        stage('copy the build to another node after packging'){
+            agent{ label 'ubuntunode1'}
+            steps{
+                unstash name: 'warfile'
             }
         }
     }
