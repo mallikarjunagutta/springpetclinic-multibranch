@@ -36,6 +36,7 @@ pipeline{
             agent{ label 'ubuntunode1'}
             steps{
                 unstash name: 'warfile'
+                sh script: 'echo you can deploy your file using ansible/terraform now go ahead'
             }
         }
     }
